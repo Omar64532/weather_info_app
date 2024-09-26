@@ -54,7 +54,7 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
               child: Text('Fetch Weather'),
             ),
             SizedBox(height: 20),
-            // Displaying the simulated weather information
+            // Displaying the simulated weather info
             Text('City: $_cityName'),
             Text('Temperature: $_temperature'),
             Text('Condition: $_weatherCondition'),
