@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 void main() {
-  runApp(MyApp());
+  runApp(WeatherApp());
 }
 
-class MyApp extends StatelessWidget {
+class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Weather Info App',
-      theme: ThemeData(primarySwatch: Colors.blue),
+      title: 'Weather Info',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
       home: WeatherHomePage(),
     );
   }
@@ -29,22 +31,10 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
 
   void _fetchWeather() {
     setState(() {
-      _cityName = _controller.text; // Get the city name from the TextField
-      _temperature = _generateRandomTemperature();
-      _weatherCondition = _generateRandomWeatherCondition();
+      _cityName = _controller.text;
+      _temperature = '${Random().nextInt(16) + 15}°C'; // Generates random temperature between 15°C and 30°C
+      _weatherCondition = ['Sunny', 'Cloudy', 'Rainy'][Random().nextInt(3)]; // Randomly selects weather condition
     });
-  }
-
-  String _generateRandomTemperature() {
-    Random random = Random();
-    int temperature = random.nextInt(16) + 15; // Random temperature between 15°C and 30°C
-    return '$temperature °C';
-  }
-
-  String _generateRandomWeatherCondition() {
-    List<String> conditions = ['Sunny', 'Cloudy', 'Rainy'];
-    Random random = Random();
-    return conditions[random.nextInt(conditions.length)];
   }
 
   @override
@@ -60,10 +50,11 @@ class _WeatherHomePageState extends State<WeatherHomePage> {
               decoration: InputDecoration(labelText: 'Enter city name'),
             ),
             ElevatedButton(
-              onPressed: _fetchWeather,
+              onPressed: _fetchWeather, // Calls the fetch function
               child: Text('Fetch Weather'),
             ),
             SizedBox(height: 20),
+            // Displaying the simulated weather information
             Text('City: $_cityName'),
             Text('Temperature: $_temperature'),
             Text('Condition: $_weatherCondition'),
